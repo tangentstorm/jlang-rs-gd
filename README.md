@@ -1,7 +1,8 @@
-# j-rs-gd
+# jlang-rs-gd
 jlang--godot bridge, built in rust
 
-## usage
+## building
+- install rust
 - install [clang](https://clang.llvm.org/).
 - set the `LIBCLANG_PATH` environment variable
 - run `cargo test`, `cargo build`, etc.
