@@ -1,2 +1,4 @@
 /target
 Cargo.lock
+demo/*.dll
+demo/.import
