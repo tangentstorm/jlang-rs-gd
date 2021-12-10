@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://JLang.gdns" type="Script" id=1]
+[ext_resource path="res://jlang-rs-gd.gdns" type="Script" id=1]
+[ext_resource path="res://JConsole.gd" type="Script" id=2]
 
 [node name="JLangDemo" type="PanelContainer"]
 anchor_right = 1.0
@@ -9,28 +10,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JLang" type="Node" parent="."]
+[node name="jlang-rs-gd" type="Node" parent="."]
 script = ExtResource( 1 )
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="JConsole" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
 margin_bottom = 593.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="output" type="RichTextLabel" parent="VBox"]
+[node name="output" type="RichTextLabel" parent="JConsole"]
 margin_right = 1010.0
 margin_bottom = 558.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="input" type="LineEdit" parent="VBox"]
+[node name="input" type="LineEdit" parent="JConsole"]
 margin_top = 562.0
 margin_right = 1010.0
 margin_bottom = 586.0
@@ -40,3 +43,5 @@ caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="text_entered" from="JConsole/input" to="JConsole" method="_on_jcmd"]

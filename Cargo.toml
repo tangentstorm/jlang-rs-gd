@@ -9,3 +9,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 gdnative = "0.9"
+# jlang = { git = "https://github.com/tangentstorm/jlang-rs" }
+jlang = { path='../jlang-rs' }
