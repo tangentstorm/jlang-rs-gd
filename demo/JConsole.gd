@@ -12,6 +12,6 @@ func bbo(s:String):
 	return s
 
 func _on_jcmd(s:String):
-	var r = jrg.cmd(s)
+	var r = jrg.cmd_s(s)
 	output.bbcode_text += bbi(s)
 	output.bbcode_text += bbo(r)

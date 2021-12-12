@@ -1,12 +1,10 @@
 use jlang::{ JT, JS, JContainer };
 use gdnative::{prelude::*, api::script::*};
 
-
 #[derive(NativeClass)] #[inherit(Node)]
 pub struct JLang {
   c: JContainer,
-  jt: JT
-}
+  jt: JT }
 
 #[methods]
 impl JLang {
@@ -24,9 +22,10 @@ impl JLang {
       godot_print!("script source code:\n\n{}", s.source_code()); }
     else { godot_print!("no script attached.")}}
 
-  #[export] fn cmd(&self, _:&Node, s:String)->Variant {
-    godot_print!("[j cmd] <- {}", s);
+  /// run a j command and return a string variant
+  #[export] fn cmd_s(&self, _:&Node, s:String)->Variant {
     let cs = std::ffi::CString::new(s).unwrap();
+    godot_print!("[j cmd] <- {}", cs.to_str().unwrap());
     let c = JS::from_ptr(cs.as_ptr());
     godot_print!("input: {}", c.to_str());
     let _rc = self.c.jdo(self.jt, c);
@@ -37,9 +36,12 @@ impl JLang {
     godot_print!("[j cmd] -> {:?}", res);
     res }
 
+  /// run a j command and return the actual data as a variant.
+  #[export] fn cmd(&self, _:&Node, s:String)->Variant {
+    Variant::new() }
+
   #[export] fn getv(&self, _:&Node, name:String)->Variant {
-    Variant::new()}
-}
+    Variant::new()} }
 
 fn init(handle: InitHandle) {
   handle.add_class::<JLang>(); }
