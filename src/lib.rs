@@ -20,7 +20,7 @@ impl JLang {
 
   /// fetch a j variable by name (nouns only)
   #[export] fn getv(&self, _:&Node, v:String)->Variant {
-    let jv = self.jp.get_val(&v);
+    let jv = self.jp.get_v(&v);
     return match jv.data {
       JData::Int(i) => Variant::from_i64(i),
       JData::IntV(v) => {
