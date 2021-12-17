@@ -36,6 +36,6 @@ impl JLang {
     self.getv(n, "RESULT_jrs_".to_string()) }}
 
 fn init(handle: InitHandle) {
-  handle.add_class::<JLang>(); }
+  handle.add_tool_class::<JLang>(); }
 
 godot_init!(init);
