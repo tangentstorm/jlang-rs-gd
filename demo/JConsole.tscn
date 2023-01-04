@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://JConsole.gd" type="Script" id=1]
+[ext_resource path="res://addons/jlang-rs-gd/jlang-rs-gd.gdns" type="Script" id=2]
+[ext_resource path="res://gslib/GsConsole.gd" type="Script" id=3]
+
+[node name="JConsole" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="JLang" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="GsConsole" type="Control" parent="."]
+margin_left = 71.5146
+margin_top = 8.0022
+margin_right = 1362.51
+margin_bottom = 665.002
+focus_mode = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="panel" type="PanelContainer" parent="."]
+margin_left = 65.9255
+margin_top = 679.232
+margin_right = 1340.93
+margin_bottom = 988.232
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1268.0
+margin_bottom = 302.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="output" type="RichTextLabel" parent="panel/vbox"]
+margin_right = 1261.0
+margin_bottom = 267.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="input" type="LineEdit" parent="panel/vbox"]
+margin_top = 271.0
+margin_right = 1261.0
+margin_bottom = 295.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[connection signal="keypress" from="GsConsole" to="." method="_on_GsConsole_keypress"]
+[connection signal="text_entered" from="panel/vbox/input" to="." method="_on_input_text_entered"]
