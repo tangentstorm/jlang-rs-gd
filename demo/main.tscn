@@ -44,4 +44,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="text_entered" from="JConsole/input" to="JConsole" method="_on_jcmd"]
+[connection signal="text_entered" from="JConsole/input" to="JConsole" method="_on_input_text_entered"]
