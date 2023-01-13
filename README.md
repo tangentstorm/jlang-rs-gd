@@ -10,7 +10,7 @@
 
 - [rust and cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) (rust is a programming language, cargo is its build tool)
 - [clang](https://clang.llvm.org/) (the godot bindings need this to build)
-- [godot](https://godotengine.org/) (I use 3.3, but any 3.x should work)
+- [godot](https://godotengine.org/) (I use 3.5.1, but any 3.x should work)
 - [j](https://www.jsoftware.com/#/README) (so you have a j dll to call)
 
 ## building the dll
@@ -40,6 +40,8 @@ examples:
     LIBCLANG_PATH='d:/program files/llvm/bin' cargo test
 
 ## Running the demo
+
+<img src="demo-screenshot.png"/>
 
 Once you have a sucessful build:
 
