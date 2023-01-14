@@ -2,3 +2,4 @@
 Cargo.lock
 demo/*.dll
 demo/.import
+.godot/
