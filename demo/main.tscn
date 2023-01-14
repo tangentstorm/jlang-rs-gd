@@ -7,14 +7,11 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="jlang-rs-gd" type="Node" parent="."]
+[node name="jlang-rs-gd" type="JLang" parent="."]
 
 [node name="JConsole" type="VBoxContainer" parent="."]
 layout_mode = 2
 script = ExtResource("2")
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="output" type="RichTextLabel" parent="JConsole"]
 layout_mode = 2
@@ -27,3 +24,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 expand_to_text_length = true
 caret_blink = true
+
+[connection signal="text_submitted" from="JConsole/input" to="JConsole" method="_on_input_text_submitted"]
