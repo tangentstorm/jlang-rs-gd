@@ -1,41 +1,49 @@
 use jlang::{ JProc, JData };
-use gdnative::prelude::*;
+use godot::prelude::*;
 
-#[derive(NativeClass)] #[inherit(Node)]
-pub struct JLang { jp: JProc }
+struct JLangLib;
+#[gdextension]
+unsafe impl ExtensionLibrary for JLangLib {}
 
-#[methods]
+#[derive(GodotClass)]
+#[class(base=Node)]
+pub struct JLang {
+  #[base] base : Base<Node>,
+  jp: JProc }
+
+#[godot_api]
 impl JLang {
 
-  fn new(_owner: &Node) -> Self {
-    let jp = JProc::load();
-    JLang { jp }}
-
-  #[export] fn _ready(&self, _n: &Node) {
-    godot_print!("Hello from jlang-rs-gd!"); }
-
-  /// run a j command and return a string variant
-  #[export] fn cmd_s(&self, _:&Node, s:String)->Variant {
-    Variant::new(self.jp.cmd_s(&s).as_str()) }
+  /// run a j command and return a string
+  #[func] fn cmd_s(&self, gs:GodotString)->GodotString {
+    let s = String::from(&gs);
+    GodotString::from(self.jp.cmd_s(&s.as_str())) }
 
   /// fetch a j variable by name (nouns only)
-  #[export] fn getv(&self, _:&Node, v:String)->Variant {
-    let jv = self.jp.get_v(&v);
+  #[func] fn getv(&self, gs:GodotString)->Variant {
+    let s: String = String::from(&gs);
+    let jv = self.jp.get_v(&s.as_str());
     return match jv.data {
-      JData::Int(i) => Variant::new(i),
+      JData::Int(i) => Variant::from(i),
       JData::IntV(v) => {
-        if jv.rank > 1 { Variant::new("TODO: rank>1") }
+        if jv.rank > 1 { Variant::from(GodotString::from("TODO: rank>1")) }
         else {
-          let vi32:Vec<i32> = v.iter().map(|&x| x as i32).collect();
-          PoolArray::from_vec(vi32).to_variant() }},
-      _ => Variant::new(0) }}
+          Variant::from(GodotString::from("TODO: <pool int array>"))
+          //let vi32:Vec<i32> = v.iter().map(|&x| x as i32).collect();
+          //PoolArray::from_vec(vi32).to_variant()
+        }},
+      _ => Variant::nil() }}
 
   /// run a j command and return the actual data as a variant.
-  #[export] fn cmd(&self, n:&Node, s:String)->Variant {
-    self.jp.cmd_v(&s);
-    self.getv(n, "RESULT_jrs_".to_string()) }}
+  #[func] fn cmd(&self, gs:GodotString)->Variant {
+    let s = String::from(&gs);
+    self.jp.cmd_v(&s.as_str());
+    self.getv("RESULT_jrs_".into()) }}
 
-fn init(handle: InitHandle) {
-  handle.add_tool_class::<JLang>(); }
+#[godot_api]
+impl GodotExt for JLang {
+  fn init(base: Base<Self::Base>)  -> Self {
+    Self { base, jp: JProc::load() }}
 
-godot_init!(init);
+  fn ready(&mut self) {
+    godot_print!("hello from jlang-rs-gd!"); }}
