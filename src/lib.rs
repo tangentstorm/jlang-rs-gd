@@ -29,8 +29,7 @@ impl JLang {
         if jv.rank > 1 { Variant::from(GodotString::from("TODO: rank>1")) }
         else {
           let vi32:Vec<i32> = v.iter().map(|&x| x as i32).collect();
-          TypedArray::from_iter(vi32).to_variant()
-        }},
+          TypedArray::<i32>::from_iter(vi32).to_variant() }},
       _ => Variant::nil() }}
 
   /// run a j command and return the actual data as a variant.
