@@ -28,9 +28,8 @@ impl JLang {
       JData::IntV(v) => {
         if jv.rank > 1 { Variant::from(GodotString::from("TODO: rank>1")) }
         else {
-          Variant::from(GodotString::from("TODO: <pool int array>"))
-          //let vi32:Vec<i32> = v.iter().map(|&x| x as i32).collect();
-          //PoolArray::from_vec(vi32).to_variant()
+          let vi32:Vec<i32> = v.iter().map(|&x| x as i32).collect();
+          TypedArray::from_iter(vi32).to_variant()
         }},
       _ => Variant::nil() }}
 
