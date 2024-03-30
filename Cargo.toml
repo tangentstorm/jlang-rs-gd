@@ -9,5 +9,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
-# jlang = { git = "https://github.com/tangentstorm/jlang-rs" }
-jlang = { path='../jlang-rs' }
+jlang = { git = "https://github.com/tangentstorm/jlang-rs" }
+#jlang = { path='../jlang-rs' }

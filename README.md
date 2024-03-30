@@ -10,51 +10,37 @@
 
 - [rust and cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) (rust is a programming language, cargo is its build tool)
 - [clang](https://clang.llvm.org/) (the godot bindings need this to build)
-- [godot](https://godotengine.org/) (I use 3.5.1, but any 3.x should work)
+- [godot](https://godotengine.org/) (I use 4.2.1)
 - [j](https://www.jsoftware.com/#/README) (so you have a j dll to call)
 
 ## building the dll
 
 The output of the build process is a dll that you need to copy to your Godot project.
 
-Until [jlang-rs](https://github.com/tangentstorm/jlang-rs) is somewhat
-stable, you need a local working copy in a sibling directory
-(or uncomment the `{ git = ... }` line in `Cargo.toml`)
-
-    cd /path/to/dev/area
-    git clone https://github.com/tangentstorm/jlang-rs
     git clone https://github.com/tangentstorm/jlang-rs-gd
     cd jlang-rs-gd
-
-to build `jlang_rs_gd.dll`:
-
-- set the `LIBCLANG_PATH` environment variable
-- run `cargo test`, `cargo build`, etc.
-
-examples:
-
-    # powershell:
-    $env:LIBCLANG_PATH="d:/program files/llvm/bin"; cargo test
-
-    # git bash:
-    LIBCLANG_PATH='d:/program files/llvm/bin' cargo test
+    cargo build
 
 ## Running the demo
 
 <img src="demo-screenshot.png"/>
 
-Once you have a sucessful build:
+Once you have a sucessful build, make sure you have `j.dll` on your path somewhere.
 
     cp target/debug/jlang_rs_gd.dll demo/
-    cp j.dll demo/   #  or .so on linux (untested)
+    cp j.dll demo/   # if it's not on your path
 
 The run godot and open the project in the `demo/` directory.
 
 ## Adding the DLL to your own Godot project
 
-This is a slightly tedious, manual process:
+You should be able to just copy `jlang_rs_gd.dll` and `jlang_rs_gd.gdextension`.
 
-- copy the two DLLs from the above section to your project directory.
-- copy the `jlang-rs-gd.tres` file from the demo directory, or [recreate it from scratch](https://godot-rust.github.io/book/getting-started/hello-world.html#creating-the-nativescript-resource
-)
-- create a GdNative script in godot, using jlang-rs-gd.tres as the
+## Running on mac/linux/wasm.
+
+This is windows-only for now, but you may be able to get it running on other platforms yourself.
+
+See here:
+
+https://godot-rust.github.io/book/intro/hello-world.html
+
