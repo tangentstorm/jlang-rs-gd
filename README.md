@@ -34,7 +34,10 @@ The run godot and open the project in the `demo/` directory.
 
 ## Adding the DLL to your own Godot project
 
-You should be able to just copy `jlang_rs_gd.dll` and `jlang_rs_gd.gdextension`.
+To use this in your own godot project, just copy `jlang_rs_gd.dll` and
+`jlang_rs_gd.gdextension`, but note the `.gdextension' file contains
+the path to the the `.dll` file relative to the root of your godot project,
+so you may need to change that line.
 
 ## Running on mac/linux/wasm.
 
@@ -43,4 +46,3 @@ This is windows-only for now, but you may be able to get it running on other pla
 See here:
 
 https://godot-rust.github.io/book/intro/hello-world.html
-
