@@ -1,6 +1,6 @@
 [package]
 name = "jlang-rs-gd"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,6 +8,6 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-godot = { git = "https://github.com/godot-rust/gdextension", branch = "master" }
+godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
 # jlang = { git = "https://github.com/tangentstorm/jlang-rs" }
 jlang = { path='../jlang-rs' }
